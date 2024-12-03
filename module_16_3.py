@@ -13,13 +13,13 @@ async def get_all_messages() -> dict:
 @app.post("/user/{username}/{age}")
 async def add_user(username=str, age=int) -> str:
     current_index = str(int(max(users, key=int)) + 1)
-    users[current_index] = f'Имя: {username}, {age}'
+    users[current_index] = f'Имя: {username}, Возраст: {age}'
     return f"User {current_index} is registered"
 
 
 @app.put('/user/{user_id}/{username}/{age}')
 async def update_user(user_id, username, age) -> str:
-    users[user_id] = f'{username}, возраст: {age}'
+    users[user_id] = f'Имя: {username}, возраст: {age}'
     return f"The user {user_id} is updated"
 
 
