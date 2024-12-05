@@ -45,8 +45,11 @@ async def update_user(user_id: Annotated[int, Path(ge=1, le=100, description='En
 
 @app.delete('/user/{user_id}')
 async def delete_user(user_id):
-    users.pop(user_id)
-    return user_id
+    if user_id in users:
+        users.pop(user_id)
+        return user_id
+    else:
+        raise HTTPException(status_code=404, detail='User was not found')
 
 #                                                  python -m uvicorn module_16_4:app
 
