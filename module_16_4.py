@@ -22,7 +22,7 @@ async def get_all_messages() -> list[User]:
 async def add_user(username: Annotated[str, Path(min_length=5, max_length=20, description='Enter username')],
                    age: Annotated[int, Path(ge=18, le=120, description="Enter age")]) -> User:
     if len(users) >= 1:
-        user_id = len(users) + 1
+        user_id = users[-1][id] + 1
     else:
         user_id = 1
     new_user = User(id=user_id, username=username, age=age)
@@ -46,6 +46,7 @@ async def update_user(user_id: Annotated[int, Path(ge=1, le=100, description='En
 @app.delete('/user/{user_id}')
 async def delete_user(user_id):
     users.pop(user_id)
+    return user_id
 
 #                                                  python -m uvicorn module_16_4:app
 
