@@ -31,7 +31,7 @@ def create_user(username: Annotated[str, Path(min_length=5, max_length=20, descr
 
     # new_id = (users[-1].id +1) if users else 1
     if len(users) != 0:
-        new_id = len(users) + 1
+        new_id = users[-1][id] + 1
     else:
         new_id = 1
     new_user = User(id=new_id, username=username, age=age)
