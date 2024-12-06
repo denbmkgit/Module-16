@@ -44,18 +44,10 @@ Path(ge=18, le=120, description='Enter age')]) -> User:
 
 
 @app.delete('/user/{user_id}')
-async def delete_user(user_id):
+async def delete_user(user_id: int):
     for user in users:
-        if user_id == user_id:
-            users.pop(int(user_id))
-            return user_id
+        if user.id == user_id:
+            users.remove(user)
+            return user
     else:
         raise HTTPException(status_code=404, detail='User was not found')
-
-#                                                                               python -m uvicorn module_16_4:app
-
-
-# Get  - адрес в строке, это выглядит так -  ?переменная=значение. еще считаю что это получение данных С сервира
-# Post - формы - оформиить заказ в магазине (например). Еще считается что это отправка данных На сервер
-# Put  - по своей сути пытается что то обновить, заменить и так далее
-# Delete - удаляет
